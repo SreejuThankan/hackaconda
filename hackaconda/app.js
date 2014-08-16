@@ -4,44 +4,26 @@ var io = require('socket.io')(http);
 
 var playersCreated = 0;
 
-var players =
-{
-     player1 : {
-        id: 1,
-        x : 50,
-        y : 0,
-        moveUp: function () {
-            --this.y;
-        },
-        moveDown: function () {
-            ++this.y;
-        },
-        moveRight: function () {
-            ++this.x;
-        },
-        moveLeft: function () {
-            --this.x;
-        }
-
-    },
- player2: {
-        id: 2,
-        x: 0,
-        y: 0,
-        moveUp: function () {
-            --this.y;
-        },
-        moveDown: function () {
-            ++this.y;
-        },
-        moveRight: function () {
-            ++this.x;
-        },
-        moveLeft: function () {
-            --this.x;
-        }
-
+function Player(id,x,y){
+    this.id=id;
+    this.x=x;
+    this.y=y;
+    this.moveUp=function () {
+        --this.y;
+    };
+    this.moveDown=function () {
+        ++this.y;
+    };
+    this.moveRight=function () {
+        ++this.x;
+    };
+    this.moveLeft=function () {
+        --this.x;
     }
+}
+
+var players = {player1 : new Player(1,50,0),
+ player2: new Player(2,0,0)
 };
 app.get('/', function (req, res) {
     res.sendfile('index.html');
