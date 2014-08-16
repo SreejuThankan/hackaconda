@@ -16,9 +16,9 @@
 
 <body>
 
-<div id="player1" style="background-color: black; padding:2px ; width:5px; position:absolute"></div>
+<div id="player1" style="background-color: black; padding:2px ; width:25px; height:25px; position:absolute"></div>
 
-<div id="player2" style="background-color: blue; padding:2px ; width:5px; position:absolute"></div>
+<div id="player2" style="background-color: blue; padding:2px ; width:25px; height:25px;position:absolute"></div>
 <ul id="messages"></ul>
 <form action="">
     <input id="m" name="message" autocomplete="off" /><button>Send</button>
@@ -51,15 +51,15 @@
 
     var keyEvents = {
         37 : function() {
-            socket.emit("movePlayer" + playerId + "Left");
+            socket.emit("movePlayerLeft",{id:playerId});
              },
         39 : function(){
-            socket.emit("movePlayer" + playerId + "Right");
+            socket.emit("movePlayerRight", {id:playerId});
         },
         38 : function(){
-            socket.emit("movePlayer" + playerId + "Up");
+            socket.emit("movePlayerUp",{id:playerId});
         },
-        40: function(){socket.emit("movePlayer" + playerId + "Down");}
+        40: function(){socket.emit("movePlayerDown",{id:playerId})}
 
     };
 
