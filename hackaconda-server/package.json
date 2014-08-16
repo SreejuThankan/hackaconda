@@ -1,0 +1,19 @@
+{
+  "name": "hackaconda",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adozy/hackaconda.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adozy/hackaconda/issues"
+  },
+  "homepage": "https://github.com/adozy/hackaconda"
+}
