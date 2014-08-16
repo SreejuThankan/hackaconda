@@ -16,8 +16,9 @@
 
 <body>
 
-<div id="player1" style="background-color: black; padding:2px ; width:2px; position:absolute"></div>
+<div id="player1" style="background-color: black; padding:2px ; width:5px; position:absolute"></div>
 
+<div id="player2" style="background-color: blue; padding:2px ; width:5px; position:absolute"></div>
 <ul id="messages"></ul>
 <form action="">
     <input id="m" name="message" autocomplete="off" /><button>Send</button>
@@ -32,22 +33,33 @@
         return false;
     });
 
+    var playerId;
     socket.on('update position', function(board) {
-        $('#player1').css('top', board.player1.y);
-        $('#player1').css('left', board.player1.x);
+        for (property in board) {
+        $('#player' + board[property].id).css('top', board["player" + board[property].id].y);
+        $('#player' + board[property].id).css('left', board["player" + board[property].id].x);
+    }
     });
+
+    $.get(
+       "/playerId",
+       function(data) {
+          playerId=data;
+       }
+    );
+
 
     var keyEvents = {
         37 : function() {
-            socket.emit('movePlayer1Left');
+            socket.emit("movePlayer" + playerId + "Left");
              },
         39 : function(){
-            socket.emit('movePlayer1Right');
+            socket.emit("movePlayer" + playerId + "Right");
         },
         38 : function(){
-            socket.emit('movePlayer1Up');
+            socket.emit("movePlayer" + playerId + "Up");
         },
-        40: function(){socket.emit('movePlayer1Down')}
+        40: function(){socket.emit("movePlayer" + playerId + "Down");}
 
     };
 
