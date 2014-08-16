@@ -15,6 +15,9 @@
 </head>
 
 <body>
+
+<div id="player1" style="background-color: black; padding:2px ; width:2px; position:absolute"></div>
+
 <ul id="messages"></ul>
 <form action="">
     <input id="m" name="message" autocomplete="off" /><button>Send</button>
@@ -28,6 +31,28 @@
         $('#m').val('');
         return false;
     });
+
+    socket.on('update position', function(board) {
+        $('#player1').css('top', board.player1.y);
+        $('#player1').css('left', board.player1.x);
+    });
+
+    document.onkeyup = function(evt) {
+        evt = evt || window.event;
+        if(evt.keyCode == 38) {
+            socket.emit('movePlayer1Up');
+        }
+        if(evt.keyCode==40){
+            socket.emit('movePlayer1Down');
+        }
+        if (evt.keyCode == 37) {
+            socket.emit('movePlayer1Left');
+        }
+        if (evt.keyCode == 39) {
+            socket.emit('movePlayer1Right');
+        }
+    };
 </script>
+
 </body>
 </html>
