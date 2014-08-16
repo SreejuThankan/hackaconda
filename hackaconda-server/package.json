@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/adozy/hackaconda/issues"
   },
-  "homepage": "https://github.com/adozy/hackaconda"
+  "homepage": "https://github.com/adozy/hackaconda",
+  "dependencies": {
+    "socket.io": "^1.0.6"
+  }
 }
