@@ -51,15 +51,15 @@
 
     var keyEvents = {
         37 : function() {
-            socket.emit("movePlayerLeft",{id:playerId});
+            socket.emit("movePlayer",{id:playerId, direction:"moveLeft"});
              },
         39 : function(){
-            socket.emit("movePlayerRight", {id:playerId});
+            socket.emit("movePlayer", {id:playerId, direction:"moveRight"});
         },
         38 : function(){
-            socket.emit("movePlayerUp",{id:playerId});
+            socket.emit("movePlayer",{id:playerId, direction:"moveUp"});
         },
-        40: function(){socket.emit("movePlayerDown",{id:playerId})}
+        40: function(){socket.emit("movePlayer",{id:playerId, direction:"moveDown"})}
 
     };
 

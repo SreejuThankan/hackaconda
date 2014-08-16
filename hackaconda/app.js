@@ -55,17 +55,9 @@ io.on('connection', function (socket) {
     socket.on('disconnect', function () {
         console.log('user disconnected');
     });
-    socket.on('movePlayerLeft', function (player) {
-        players["player" + player.id].moveLeft();
-    });
-    socket.on('movePlayerRight', function (player   ) {
-        players["player" + player.id].moveRight();
-    });
-    socket.on('movePlayerUp', function (player) {
-        players["player" + player.id].moveUp();
-    });
-    socket.on('movePlayerDown', function (player) {
-        players["player" + player.id].moveDown();
+
+    socket.on('movePlayer', function (player) {
+        players["player" + player.id][player.direction]();
     });
     setInterval(emitPlayerPositions, 20);
 });
