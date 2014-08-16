@@ -11,14 +11,17 @@
 <div id="player2" style="background-color: blue; padding:2px ; width:25px; height:25px;position:absolute"></div>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script><!--replace with jquery src in bower_components-->
 <script>
     var socket = io();
     var playerId;
-    socket.on('update position', function(board) {
-        for (property in board) {
-        $('#player' + board[property].id).css('top', board["player" + board[property].id].y);
-        $('#player' + board[property].id).css('left', board["player" + board[property].id].x);
+    socket.on('update position', function(players) {
+
+        for (var key in players) {
+            var playerElement = $('#player' + players[key].id);
+            var player = players["player" + players[key].id];
+            playerElement.css('top', player.y);
+        playerElement.css('left', player.x);
     }
     });
 
