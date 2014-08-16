@@ -33,17 +33,23 @@
     );
 
 
+
     var keyEvents = {
         37 : function() {
-            socket.emit("movePlayer",{id:playerId, direction:"moveLeft"});
+            this.emitMovePlayerEvent(playerId,"moveLeft");
              },
         39 : function(){
-            socket.emit("movePlayer", {id:playerId, direction:"moveRight"});
+            this.emitMovePlayerEvent(playerId,"moveRight");
         },
         38 : function(){
-            socket.emit("movePlayer",{id:playerId, direction:"moveUp"});
+            this.emitMovePlayerEvent(playerId,"moveUp");
         },
-        40: function(){socket.emit("movePlayer",{id:playerId, direction:"moveDown"})}
+        40: function(){
+            socket.emit(this.emitMovePlayerEvent(playerId,"moveDown"))
+        },
+        emitMovePlayerEvent : function(playerId, direction){
+            socket.emit("movePlayer",{id:playerId, direction:direction});
+        }
 
     };
 
