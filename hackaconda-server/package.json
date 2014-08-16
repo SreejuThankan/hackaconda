@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/adozy/hackaconda",
   "dependencies": {
+    "express": "^4.8.4",
     "socket.io": "^1.0.6"
   }
 }
