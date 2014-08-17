@@ -4,16 +4,36 @@ var socketio = require('socket.io');
 var fs = require('fs');
 var url = require('url');
 
-
 var server = http.createServer(function(req, res){
+    console.log(req.url);
     var requestedPathName = url.parse(req.url).pathname;
-    if(requestedPathName=="/"){
-        fs.createReadStream('./index.html').pipe(res);
-    }else if(requestedPathName=="/playerId"){
+
+    if(requestedPathName=="/playerId"){
         res.writeHead(200);
         res.write("" + ++playersCreated);
         res.end();
+        return;
     }
+
+    if(req.url =="/"){
+        serveStaticFile('index.html');
+    }else {
+        console.log(req.url);
+        serveStaticFile(req.url);
+
+    }
+    function serveStaticFile(file){
+        fs.readFile('./' + file, function(err, data){
+            if(err){
+                console.log(err);
+                res.writeHead(404);
+                res.end();
+            }
+            res.end(data);
+        });
+    }
+
+
 }).listen(3000);
 
 
