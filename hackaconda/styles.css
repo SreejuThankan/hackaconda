@@ -1,0 +1,16 @@
+#player1 {
+    background-color: black;
+    padding: 2px;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+}
+
+#player2 {
+
+    background-color: blue;
+    padding: 2px;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+}
