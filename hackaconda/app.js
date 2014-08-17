@@ -1,6 +1,23 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+
+var http = require('http')
+var socketio = require('socket.io');
+var fs = require('fs');
+var url = require('url');
+
+
+var server = http.createServer(function(req, res){
+    var requestedPathName = url.parse(req.url).pathname;
+    if(requestedPathName=="/"){
+        fs.createReadStream('./index.html').pipe(res);
+    }else if(requestedPathName=="/playerId"){
+        res.writeHead(200);
+        res.write("" + ++playersCreated);
+        res.end();
+    }
+}).listen(3000);
+
+
+var io = socketio(server);
 
 var playersCreated = 0;
 
@@ -25,12 +42,6 @@ function Player(id,x,y){
 var players = {player1 : new Player(1,50,0),
  player2: new Player(2,0,0)
 };
-app.get('/', function (req, res) {
-    res.sendfile('index.html');
-});
-app.get('/playerId', function (req, res) {
-    res.send("" + ++playersCreated);
-});
 
 io.on('connection', function (socket) {
     console.log('a user connected');
@@ -44,7 +55,7 @@ io.on('connection', function (socket) {
     setInterval(emitPlayerPositions, 20);
 });
 
-http.listen(3000);
+
 
 function emitPlayerPositions() {
     io.emit('update position', players);
